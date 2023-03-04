@@ -1,35 +1,28 @@
-import type { LoaderArgs } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react";
-import { DataGrid, GridColDef, GridRowsProp, GridValueGetterParams } from '@mui/x-data-grid';
-import Dashboard from "~/dashboard/Dashboard";
+import * as React from 'react';
+import DatagridTest from '../dashboard/DatagridTests'
 
-export async function loader({ request }: LoaderArgs) {
-  return [
-    {
-      "id": 1,
-      "name": "John",
-      "email": "john@example.com"
-    },
-    {
-      "id": 2,
-      "name": "Sarah",
-      "email": "sarah@example.com"
-    },
-    {
-      "id": 3,
-      "name": "Mike",
-      "email": "mike@example.com"
-    }
-  ]
+import type { LoaderArgs } from "@remix-run/node"
+import { useLoaderData } from '@remix-run/react';
+
+export async function loader({request}: LoaderArgs) {
+  const rows = [
+    { id: 1, col1: 'Hello', col2: 'World' },
+    { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
+    { id: 3, col1: 'MUI', col2: 'is Amazing' },
+];
+  return rows
 };
 
 export default function Index() {
+
+  const rows = useLoaderData();
+  
 
   return (
     <div style={{ fontFamily: "roboto" }}>
       <h1>Welcome to Remix</h1>
       <div>
-        <Dashboard/>
+       <DatagridTest  rows={rows}/>
       </div>
     </div >
   );
